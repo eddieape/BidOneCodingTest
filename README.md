@@ -1,6 +1,6 @@
 # BidOneCodingTest
 
-This project is only a coding test for BidOne, it shows a simple form for a user to enter information. When the form is submitted, a Web API is called to post form data to the backend, the posted data saved in a file in json form.
+This is a Web application based on ASP.NET Core with Angular. The project is only a coding test for BidOne, it shows a simple form for a user to enter information. When the form is submitted, a Web API is called to post form data to the backend, the posted data saved in a file in json form.
 
 ## Setup Environment
 
