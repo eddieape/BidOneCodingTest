@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { SharedService } from '../shared.service';
+
 
 @Component({
     selector: 'app-user-profile',
@@ -7,13 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UserProfileComponent implements OnInit {
 
+    public SubmitResult: any;
+
     FirstName: string;
     InvalidateFirstName: boolean;
 
     LastName: string;
     InvalidateLastName: boolean;
 
-    constructor() { }
+
+    Status: boolean;
+
+    constructor(private service: SharedService) {
+    }
 
     ngOnInit(): void {
         this.FirstName = "";
@@ -22,7 +30,13 @@ export class UserProfileComponent implements OnInit {
         this.InvalidateLastName = false;
     }
 
+    changeValue(event) {
+        this.Status = false;
+        this.SubmitResult = null;
+    }
+
     savePersonalInfo() {
+
         var fn = this.FirstName.trim();
         if (fn.length == 0) {
             this.InvalidateFirstName = true;
@@ -44,5 +58,15 @@ export class UserProfileComponent implements OnInit {
             LastName: ln
         };
 
+        this.service.savePersonalInfo(val).subscribe(data => {
+
+            this.SubmitResult = data;
+            if (this.SubmitResult.status == 0) {
+                this.Status = true;
+            } else {
+                this.Status = false;
+            }
+
+        });
     }
 }
